@@ -1,3 +1,4 @@
+// 변수
 let name = "효빈";
 name = "hyobin";
 
