@@ -1,3 +1,4 @@
+// 타입
 // typeof 연산자
 let num = 10;
 console.log(typeof num);
