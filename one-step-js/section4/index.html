@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="animal-info">
+      <div id="name" class="info-item">호랑이</div>
+      <div id="color" class="info-item">노랑</div>
+      <div id="age" class="info-item">10살</div>
+    </div>
+    <!-- 특정 폼 요소에 이름을 붙여줌 -->
+    <!-- id를 할당하면 라벨을 클릭할 떄 해당 요소가 활성화됨 -->
+    <label for="fruit-select">과일</label>
+    <select id="fruit-select">
+      <option value="apple">사과</option>
+      <option value="banana">바나나</option>
+      <option value="orange" selected>오렌지</option>
+      <option value="grape">포도</option>
+    </select>
+    <label for="userName">이름</label>
+    <input
+      type="text"
+      id="userName"
+      placeholder="이름을 입력해주세요"
+      value="홍길동"
+    />
+    <label for="userPassword">비밀번호</label>
+    <input
+      type="password"
+      id="userPassword"
+      placeholder="비밀번호를 입력해주세요"
+    />
+    <button id="login-button">로그인</button>
+
+    <script src="./ch2.js"></script>
+    <script src="./ch3.js"></script>
+    <script src="./ch4.js"></script>
+  </body>
+</html>
