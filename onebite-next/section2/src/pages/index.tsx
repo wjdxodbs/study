@@ -2,11 +2,16 @@ import SearchableLayout from "@/components/searchable-layout";
 import style from "./index.module.css";
 import { ReactNode, useEffect } from "react";
 import { InferGetServerSidePropsType } from "next";
+// import fetchRandomBooks from "@/lib/fetch-random-books";
+// import fetchBooks from "@/lib/fetch-books";
 
 export const getServerSideProps = async () => {
   // 컴포넌트보다 먼저 실행되어서, 컴포넌트에서 사용할 데이터를 가져올 수 있음
-  // const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  // const data = await res.json();
+  // const [allBooks, randomBooks] = await Promise.all([
+  //   fetchBooks(),
+  //   fetchRandomBooks(),
+  // ]);
+
   const data = "hello";
 
   return {

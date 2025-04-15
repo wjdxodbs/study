@@ -1,6 +1,21 @@
 import SearchableLayout from "@/components/searchable-layout";
+// import fetchBooks from "@/lib/fetch-books";
+import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  console.log(context.query);
+  // const { q } = context.query;
+
+  // const books = await fetchBooks(q as string);
+
+  return {
+    props: {},
+  };
+};
 
 export default function Search() {
   const router = useRouter();
