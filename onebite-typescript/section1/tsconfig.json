@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // 컴파일 결과물의 자바스크립트 버전
+    "module": "ESNext", // 모듈 시스템
+    "outDir": "./dist", // 컴파일 결과물을 저장할 폴더
+    "strict": true, // 엄격한 타입 검사
+    "moduleDetection": "force", // 모듈 검사
+    "skipLibCheck": true // .d.ts 파일 검사 생략
+  },
+  "include": ["src/**/*"] // 폴더 안에 있는 모든 파일을 포함
+}
