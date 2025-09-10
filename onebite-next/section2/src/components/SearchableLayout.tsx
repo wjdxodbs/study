@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
-// import styles from "./searchable-layout.module.css";
+import styles from "./SearchableLayout.module.css";
 
 interface Props {
   children: ReactNode;
@@ -29,16 +29,14 @@ export default function SearchableLayout({ children }: Props) {
 
   return (
     <div>
-      <div>
-        <form onSubmit={onSubmitSearch}>
-          <input
-            placeholder="검색어를 입력하세요"
-            onChange={onChangeSearch}
-            value={search}
-          />
-          <button type="submit">검색</button>
-        </form>
-      </div>
+      <form className={styles.searchbar_container} onSubmit={onSubmitSearch}>
+        <input
+          placeholder="검색어를 입력하세요"
+          onChange={onChangeSearch}
+          value={search}
+        />
+        <button type="submit">검색</button>
+      </form>
       {children}
     </div>
   );

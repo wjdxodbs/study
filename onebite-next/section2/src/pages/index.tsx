@@ -1,4 +1,4 @@
-import SearchableLayout from "@/components/searchable-layout";
+import SearchableLayout from "@/components/SearchableLayout";
 import style from "./index.module.css";
 import { ReactNode, useEffect } from "react";
 import { InferGetServerSidePropsType } from "next";

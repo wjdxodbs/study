@@ -1,4 +1,4 @@
-import SearchableLayout from "@/components/searchable-layout";
+import SearchableLayout from "@/components/SearchableLayout";
 // import fetchBooks from "@/lib/fetch-books";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
