@@ -5,6 +5,11 @@ export default async function fetchRandomBooks(): Promise<BookData[]> {
 
   try {
     const res = await fetch(url);
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch random books");
+    }
+
     const data = await res.json();
     return data;
   } catch (error) {

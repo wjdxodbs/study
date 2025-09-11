@@ -9,10 +9,15 @@ export default async function fetchBooks(q?: string): Promise<BookData[]> {
 
   try {
     const res = await fetch(url);
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch books");
+    }
+
     const data = await res.json();
     return data;
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     return [];
   }
 }
