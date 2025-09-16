@@ -19,21 +19,18 @@ export default function Searchbar() {
     setSearch(e.target.value);
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!search || q === search) return;
     router.push(`/search?q=${search}`);
   };
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      onSubmit();
-    }
-  };
-
   return (
     <div className={style.container}>
-      <input value={search} onChange={onChangeSearch} onKeyDown={onKeyDown} />
-      <button onClick={onSubmit}>검색</button>
+      <form onSubmit={onSubmit}>
+        <input value={search} onChange={onChangeSearch} />
+        <button type="submit">검색</button>
+      </form>
     </div>
   );
 }
