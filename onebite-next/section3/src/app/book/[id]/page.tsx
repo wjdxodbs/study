@@ -1,7 +1,8 @@
-import { createReviewAction } from "@/actions/creat-review.action";
 import style from "./page.module.css";
-import { BookData } from "@/types";
+import { BookData, ReviewData } from "@/types";
 import { notFound } from "next/navigation";
+import { ReviewItem } from "@/components/review-item";
+import ReviewEditor from "@/components/review-edtior";
 
 async function BookDetail({ id }: { id: string }) {
   const res = await fetch(
@@ -35,15 +36,20 @@ async function BookDetail({ id }: { id: string }) {
   );
 }
 
-function ReviewEditor({ bookId }: { bookId: string }) {
+async function ReviewList({ bookId }: { bookId: string }) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/book/${bookId}`
+  );
+  if (!res.ok) {
+    throw new Error(`Review fetch failed : ${res.statusText}`);
+  }
+  const reviews: ReviewData[] = await res.json();
+
   return (
     <section>
-      <form action={createReviewAction}>
-        <input name="bookId" value={bookId} hidden readOnly />
-        <input required name="content" placeholder="리뷰 내용" />
-        <input required name="author" placeholder="작성자" />
-        <button type="submit">작성</button>
-      </form>
+      {reviews.map((review) => (
+        <ReviewItem key={review.id} review={review} />
+      ))}
     </section>
   );
 }
@@ -59,6 +65,7 @@ export default async function Page({
     <div className={style.container}>
       <BookDetail id={id} />
       <ReviewEditor bookId={id} />
+      <ReviewList bookId={id} />
     </div>
   );
 }
