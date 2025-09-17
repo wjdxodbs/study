@@ -34,5 +34,10 @@
     background-color: rgb(37, 147, 255);
     color: white;
     cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
   }
 }
