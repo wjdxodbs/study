@@ -4,6 +4,35 @@ import { notFound } from "next/navigation";
 import { ReviewItem } from "@/components/review-item";
 import ReviewEditor from "@/components/review-edtior";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`
+  );
+
+  if (!res.ok) {
+    throw new Error(`Book fetch failed : ${res.statusText}`);
+  }
+
+  const book: BookData = await res.json();
+
+  return {
+    title: `도서 ${book.title}`,
+    description: `${book.description}`,
+    openGraph: {
+      title: `도서 ${book.title}`,
+      description: `${book.description}`,
+      images: [book.coverImgUrl],
+    },
+  };
+}
 
 async function BookDetail({ id }: { id: string }) {
   const res = await fetch(
