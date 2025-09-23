@@ -1,0 +1,32 @@
+.noResults {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  color: #666;
+  min-height: 300px;
+}
+
+.noResults .icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  opacity: 0.3;
+}
+
+.noResults .title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  margin: 0;
+}
+
+.noResults .description {
+  font-size: 16px;
+  color: #888;
+  line-height: 1.5;
+  max-width: 400px;
+  margin: 0;
+}

@@ -3,6 +3,8 @@ import BookListSkeleton from "@/components/skeleton/BookListSkeleton";
 import { BookData } from "@/types";
 import { Suspense } from "react";
 import { Metadata } from "next";
+import { api } from "@/lib/api";
+import styles from "./page.module.css";
 
 export async function generateMetadata({
   searchParams,
@@ -24,13 +26,21 @@ export async function generateMetadata({
 }
 
 async function SearchBooks({ q }: { q: string }) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/search?q=${q}`
-  );
-  if (!res.ok) {
-    return <div>오류가 발생했습니다 ...</div>;
+  const searchBooks: BookData[] = await api(`/book/search?q=${q}`);
+
+  if (searchBooks.length === 0) {
+    return (
+      <div className={styles.noResults}>
+        <div className={styles.icon}>📚</div>
+        <h3 className={styles.title}>검색된 도서가 없습니다</h3>
+        <p className={styles.description}>
+          &quot;{q}&quot;에 대한 검색 결과를 찾을 수 없습니다.
+          <br />
+          다른 키워드로 검색해보세요.
+        </p>
+      </div>
+    );
   }
-  const searchBooks: BookData[] = await res.json();
 
   return (
     <div>

@@ -1,51 +1,42 @@
 import style from "./page.module.css";
 import { BookData, ReviewData } from "@/types";
-import { notFound } from "next/navigation";
 import { ReviewItem } from "@/components/review-item";
 import ReviewEditor from "@/components/review-edtior";
 import Image from "next/image";
 import { Metadata } from "next";
+import { api } from "@/lib/api";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}): Promise<Metadata> {
-  const { id } = await params;
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ id: string }>;
+// }): Promise<Metadata> {
+//   const { id } = await params;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`
-  );
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`
+//   );
 
-  if (!res.ok) {
-    throw new Error(`Book fetch failed : ${res.statusText}`);
-  }
+//   if (!res.ok) {
+//     throw new Error(`Book fetch failed : ${res.statusText}`);
+//   }
 
-  const book: BookData = await res.json();
+//   const book: BookData = await res.json();
 
-  return {
-    title: `도서 ${book.title}`,
-    description: `${book.description}`,
-    openGraph: {
-      title: `도서 ${book.title}`,
-      description: `${book.description}`,
-      images: [book.coverImgUrl],
-    },
-  };
-}
+//   return {
+//     title: `도서 ${book.title}`,
+//     description: `${book.description}`,
+//     openGraph: {
+//       title: `도서 ${book.title}`,
+//       description: `${book.description}`,
+//       images: [book.coverImgUrl],
+//     },
+//   };
+// }
 
 async function BookDetail({ id }: { id: string }) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`
-  );
-  if (!res.ok) {
-    if (res.status === 404) {
-      notFound();
-    }
+  const book: BookData = await api(`/book/${id}`);
 
-    return <div>오류가 발생했습니다 ...</div>;
-  }
-  const book: BookData = await res.json();
   const { title, subTitle, description, author, publisher, coverImgUrl } = book;
 
   return (
@@ -72,18 +63,11 @@ async function BookDetail({ id }: { id: string }) {
 }
 
 async function ReviewList({ bookId }: { bookId: string }) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/book/${bookId}`,
-    {
-      next: {
-        tags: [`review-${bookId}`],
-      },
-    }
-  );
-  if (!res.ok) {
-    throw new Error(`Review fetch failed : ${res.statusText}`);
-  }
-  const reviews: ReviewData[] = await res.json();
+  const reviews: ReviewData[] = await api(`/review/book/${bookId}`, {
+    next: {
+      tags: [`review-${bookId}`],
+    },
+  });
 
   return (
     <section>

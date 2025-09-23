@@ -4,6 +4,7 @@ import { BookData } from "@/types";
 import { Suspense } from "react";
 import BookListSkeleton from "@/components/skeleton/BookListSkeleton";
 import { Metadata } from "next";
+import { api } from "@/lib/api";
 
 // export const dynamic = "force-dynamic";
 // 특정 페이지의 유형을 강제로 Static, Dynamic 페이지로 설정
@@ -23,13 +24,7 @@ export const metadata: Metadata = {
 };
 
 async function AllBooks() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`, {
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    return <div>오류가 발생했습니다 ...</div>;
-  }
-  const allBooks: BookData[] = await res.json();
+  const allBooks: BookData[] = await api(`/book`);
 
   return (
     <>
@@ -41,14 +36,9 @@ async function AllBooks() {
 }
 
 async function RecoBooks() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`,
-    { next: { revalidate: 3 } }
-  );
-  if (!res.ok) {
-    return <div>오류가 발생했습니다 ...</div>;
-  }
-  const recoBooks: BookData[] = await res.json();
+  const recoBooks: BookData[] = await api(`/book/random`, {
+    next: { revalidate: 3 },
+  });
 
   return (
     <>
