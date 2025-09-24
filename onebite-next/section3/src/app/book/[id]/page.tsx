@@ -1,4 +1,3 @@
-import style from "./page.module.css";
 import { BookData, ReviewData } from "@/types";
 import { ReviewItem } from "@/components/review-item";
 import ReviewEditor from "@/components/review-edtior";
@@ -40,9 +39,9 @@ async function BookDetail({ id }: { id: string }) {
   const { title, subTitle, description, author, publisher, coverImgUrl } = book;
 
   return (
-    <section>
+    <section className="flex flex-col gap-2.5">
       <div
-        className={style.cover_img_container}
+        className="flex justify-center p-5 bg-center bg-cover bg-no-repeat relative before:absolute before:inset-0 before:bg-black/70"
         style={{ backgroundImage: `url('${coverImgUrl}')` }}
       >
         <Image
@@ -50,14 +49,17 @@ async function BookDetail({ id }: { id: string }) {
           alt={`도서 ${title}의 표지`}
           width={240}
           height={300}
+          className="z-1"
         />
       </div>
-      <div className={style.title}>{title}</div>
-      <div className={style.subTitle}>{subTitle}</div>
-      <div className={style.author}>
+      <div className="text-xl font-bold">{title}</div>
+      <div className="text-gray-400">{subTitle}</div>
+      <div className="text-gray-400">
         {author} | {publisher}
       </div>
-      <div className={style.description}>{description}</div>
+      <div className="bg-gray-100 p-4 whitespace-pre-line rounded-md">
+        {description}
+      </div>
     </section>
   );
 }
@@ -86,7 +88,7 @@ export default async function Page({
   const { id } = await params;
 
   return (
-    <div className={style.container}>
+    <div className="flex flex-col gap-12">
       <BookDetail id={id} />
       <ReviewEditor bookId={id} />
       <ReviewList bookId={id} />

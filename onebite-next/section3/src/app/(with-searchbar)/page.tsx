@@ -1,5 +1,4 @@
 import BookItem from "@/components/book-item";
-import style from "./page.module.css";
 import { BookData } from "@/types";
 import { Suspense } from "react";
 import BookListSkeleton from "@/components/skeleton/BookListSkeleton";
@@ -51,15 +50,15 @@ async function RecoBooks() {
 
 export default function Home() {
   return (
-    <div className={style.container}>
+    <div className="flex flex-col gap-6">
       <section>
-        <h3>지금 추천하는 도서</h3>
+        <h3 className="text-lg font-bold">지금 추천하는 도서</h3>
         <Suspense fallback={<BookListSkeleton count={2} />}>
           <RecoBooks />
         </Suspense>
       </section>
       <section>
-        <h3>등록된 모든 도서</h3>
+        <h3 className="text-lg font-bold">등록된 모든 도서</h3>
         <Suspense fallback={<BookListSkeleton count={2} />}>
           <AllBooks />
         </Suspense>

@@ -4,7 +4,6 @@ import { BookData } from "@/types";
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { api } from "@/lib/api";
-import styles from "./page.module.css";
 
 export async function generateMetadata({
   searchParams,
@@ -30,10 +29,12 @@ async function SearchBooks({ q }: { q: string }) {
 
   if (searchBooks.length === 0) {
     return (
-      <div className={styles.noResults}>
-        <div className={styles.icon}>📚</div>
-        <h3 className={styles.title}>검색된 도서가 없습니다</h3>
-        <p className={styles.description}>
+      <div className="flex flex-col items-center justify-center py-20 px-5 text-center text-[#666]">
+        <div className="text-5xl mb-5 opacity-30">📚</div>
+        <h3 className="font-bold mb-3 text-2xl text-[#333] ">
+          검색된 도서가 없습니다
+        </h3>
+        <p className="text-[#888] text-sm ">
           &quot;{q}&quot;에 대한 검색 결과를 찾을 수 없습니다.
           <br />
           다른 키워드로 검색해보세요.

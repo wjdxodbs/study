@@ -26,7 +26,11 @@ const ReviewItemDeleteButton = ({
     <form action={formAction}>
       <input name="reviewId" value={id} hidden readOnly />
       <input name="bookId" value={bookId} hidden readOnly />
-      <button type="submit" disabled={isPending}>
+      <button
+        type="submit"
+        disabled={isPending}
+        className="cursor-pointer hover:text-black"
+      >
         {isPending ? "삭제 중..." : "삭제하기"}
       </button>
     </form>
